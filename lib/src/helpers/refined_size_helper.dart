@@ -6,9 +6,15 @@ import '../type/refined_size.dart';
 import '../utility/responsive_sizing_config.dart';
 import 'device_screen_helper.dart';
 
+/// Determines [RefinedSize] variant within [DeviceScreenType] based on [size].
+///
+/// Supports custom [refinedBreakpoint]; defaults to [ResponsiveSizingConfig].
+/// Adjusts for web/desktop (uses full width) vs. mobile (shortest side).
 RefinedSize getRefinedSize(
     Size size, {
+      /// Custom breakpoints for refined sizing.
       RefinedBreakpoints? refinedBreakpoint,
+      /// Force web/desktop width logic (defaults to [kIsWeb]).
       bool isWebOrDesktop = kIsWeb,
     }) {
   DeviceScreenType deviceScreenType = getDeviceType(size);
@@ -18,7 +24,7 @@ RefinedSize getRefinedSize(
     deviceWidth = size.width;
   }
 
-  // Replaces the defaults with the user defined definitions
+  // User-defined breakpoints
   if (refinedBreakpoint != null) {
     if (deviceScreenType == DeviceScreenType.desktop) {
       if (deviceWidth > refinedBreakpoint.desktopExtraLarge) {

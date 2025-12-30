@@ -2,35 +2,52 @@ import 'package:flutter/material.dart';
 import '../core/responsive_breakpoints.dart';
 import '../type/device_screen_type.dart';
 
+/// Helper for responsive layout detection and initialization.
+///
+/// Call [init] early in your app to cache screen data. Use static detectors for quick checks.
 class ResponsiveLayoutHelper {
-  static bool _init = false;
   static late MediaQueryData _mediaQueryData;
+  /// Cached screen width after calling [init].
   static late double screenWidth;
+
+  /// Cached screen height after calling [init].
   static late double screenHeight;
+
+  /// Detected [DeviceScreenType] after calling [init].
   static DeviceScreenType? deviceType;
+
+  /// Cached [Orientation] after calling [init].
   static Orientation? orientation;
 
+  /// Initializes cached screen data from [context].
+  ///
+  /// Call this in your app's root (e.g., [MaterialApp] builder) for static access.
   static void init(BuildContext context) {
-    _init = true;
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData.size.width;
     screenHeight = _mediaQueryData.size.height;
     orientation = _mediaQueryData.orientation;
 
-    deviceType = getDeviceType();
+    deviceType = getDeviceType();  // Now relies on global screenWidth
 
-    late double defaultScreenWidth;
-    late double defaultScreenHeight;
+    // Removed unused late vars (dead code)
   }
 
-  static bool isDesktop(BuildContext context, {double maxWidth = 900}) => MediaQuery.sizeOf(context).width >= maxWidth;
+  /// Checks if screen is desktop-sized.
+  static bool isDesktop(BuildContext context, {double minWidth = 900}) => MediaQuery.sizeOf(context).width >= minWidth;
 
+  /// Checks if screen is tablet-sized.
   static bool isTablet(BuildContext context, {double minWidth = 650, double maxWidth = 900}) => MediaQuery.sizeOf(context).width >= minWidth && MediaQuery.sizeOf(context).width <= maxWidth;
 
+  /// Checks if screen is mobile-sized.
   static bool isMobile(BuildContext context, {double minWidth = 250, double maxWidth = 650}) => MediaQuery.sizeOf(context).width >= minWidth && MediaQuery.sizeOf(context).width <= maxWidth;
 
+  /// Checks if screen is watch-sized.
   static bool isWatch(BuildContext context, {double maxWidth = 250}) => MediaQuery.sizeOf(context).width <= maxWidth;
 
+  /// Determines granular [DeviceScreenType] based on cached [screenWidth].
+  ///
+  /// Requires [init] to be called first.
   static DeviceScreenType getDeviceType() {
     if (screenWidth <= ResponsiveBreakpoints.mobileSmall) {
       return DeviceScreenType.mobileSmall;
@@ -59,26 +76,5 @@ class ResponsiveLayoutHelper {
     } else {
       return DeviceScreenType.desktopExtraLarge;
     }
-
-  /*static DeviceScreenType getDeviceType() {
-    if (screenWidth <= ResponsiveBreakpoints.mobileSmall) {
-      return DeviceScreenType.mobileSmall;
-    } else if (screenWidth > 440 && screenWidth <= 542) {
-      return DeviceScreenType.tabletSmall;
-    } else if (screenWidth > 542 && screenWidth <= 628) {
-      return DeviceScreenType.tabletMedium;
-    } else if (screenWidth > 628 && screenWidth <= 770) {
-      return DeviceScreenType.tabletLarge;
-    } else if (screenWidth > 770 && screenWidth <= 842) {
-      return DeviceScreenType.tabletExtraLarge;
-    } else if (screenWidth > 842 && screenWidth <= 1320) {
-      return DeviceScreenType.desktopSmall;
-    } else if (screenWidth > 1320 && screenWidth <= 1712) {
-      return DeviceScreenType.desktopMedium;
-    } else if (screenWidth > 1712 && screenWidth <= 2460) {
-      return DeviceScreenType.desktopLarge;
-    } else {
-      return DeviceScreenType.desktopExtraLarge;
-    }*/
   }
 }

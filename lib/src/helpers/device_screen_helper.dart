@@ -5,39 +5,30 @@ import '../utility/responsive_sizing_config.dart';
 import 'device_width.dart' if (dart.library.js) 'device_width_web.dart'
 as width;
 
+/// Determines the [DeviceScreenType] based on [size] and optional [breakpoint] overrides.
+///
+/// Defaults to [ResponsiveSizingConfig] breakpoints if none provided.
 DeviceScreenType getDeviceType(
     Size size, [
+      /// Custom [ScreenBreakpoints] to use instead of defaults.
       ScreenBreakpoints? breakpoint,
     ]) {
-  double deviceWidth = width.deviceWidth(size);
+  double deviceWidth = width.deviceWidth(size);  // From conditional import
 
-  // Replaces the defaults with the user defined definitions
   if (breakpoint != null) {
-    if (deviceWidth > breakpoint.desktop) {
-      return DeviceScreenType.desktop;
-    }
-
-    if (deviceWidth > breakpoint.tablet) {
-      return DeviceScreenType.tablet;
-    }
-
-    if (deviceWidth < breakpoint.watch) {
-      return DeviceScreenType.watch;
-    }
+    if (deviceWidth > breakpoint.desktop) return DeviceScreenType.desktop;
+    if (deviceWidth > breakpoint.tablet) return DeviceScreenType.tablet;
+    if (deviceWidth < breakpoint.watch) return DeviceScreenType.watch;
   } else {
-    // If no user defined definitions are passed through use the defaults
     if (deviceWidth >= ResponsiveSizingConfig.instance.breakpoints.desktop) {
       return DeviceScreenType.desktop;
     }
-
     if (deviceWidth >= ResponsiveSizingConfig.instance.breakpoints.tablet) {
       return DeviceScreenType.tablet;
     }
-
     if (deviceWidth < ResponsiveSizingConfig.instance.breakpoints.watch) {
       return DeviceScreenType.watch;
     }
   }
-
   return DeviceScreenType.mobile;
 }

@@ -8,19 +8,21 @@ import 'package:web/web.dart' as web;
 
 import 'responsive_builder_kit_platform_interface.dart';
 
-/// A web implementation of the ResponsiveBuilderKitPlatform of the ResponsiveBuilderKit plugin.
+/// Web implementation of [ResponsiveBuilderKitPlatform].
+///
+/// Retrieves platform information from the browser.
 class ResponsiveBuilderKitWeb extends ResponsiveBuilderKitPlatform {
-  /// Constructs a ResponsiveBuilderKitWeb
+  /// Creates a web implementation of ResponsiveBuilderKit.
   ResponsiveBuilderKitWeb();
 
+  /// Registers the web implementation.
   static void registerWith(Registrar registrar) {
     ResponsiveBuilderKitPlatform.instance = ResponsiveBuilderKitWeb();
   }
 
-  /// Returns a [String] containing the version of the platform.
+  /// Returns the browser user agent as platform version.
   @override
   Future<String?> getPlatformVersion() async {
-    final version = web.window.navigator.userAgent;
-    return version;
+    return web.window.navigator.userAgent;
   }
 }

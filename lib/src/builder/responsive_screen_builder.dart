@@ -4,21 +4,35 @@ import '../type/device_screen_type.dart';
 import '../utility/responsive_app_util.dart';
 import '../utility/responsive_builder.dart';
 
+/// Builds responsive screens by selecting layouts based on device type.
+///
+/// Supports watch/mobile/tablet/desktop; falls back to mobile if unspecified.
+/// Requires at least mobile or desktop builder.
 class ResponsiveScreenBuilder extends StatelessWidget {
+  /// Optional custom [ScreenBreakpoints] to override default device detection thresholds.
   final ScreenBreakpoints? breakpoints;
 
-  final WidgetBuilder? watch;
-  final WidgetBuilder? mobile;
-  final WidgetBuilder? tablet;
+  /// Builder for desktop devices.
   final WidgetBuilder? desktop;
+  /// Builder for tablet devices.
+  final WidgetBuilder? tablet;
+  /// Builder for mobile devices.
+  final WidgetBuilder? mobile;
+  /// Builder for watch-sized devices.
+  final WidgetBuilder? watch;
 
+  /// Named constructor for [ResponsiveScreenBuilder].
+  ///
+  /// Initializes with optional builders for different screen types.
+  /// Requires at least [mobile] or [desktop] to be provided; validated internally.
+  /// Use this to build adaptive layouts based on device detection.
   ResponsiveScreenBuilder.builder({
     super.key,
     this.breakpoints,
-    this.watch,
-    this.mobile,
-    this.tablet,
     this.desktop,
+    this.tablet,
+    this.mobile,
+    this.watch,
   }) {
     _checkIfMobileOrDesktopIsSupplied();
   }
@@ -58,13 +72,13 @@ class ResponsiveScreenBuilder extends StatelessWidget {
     );
   }
 
+  /// Validates that either [mobile] or [desktop] is provided.
   void _checkIfMobileOrDesktopIsSupplied() {
     final hasMobileLayout = mobile != null;
     final hasDesktopLayout = desktop != null;
-
     assert(
     hasMobileLayout || hasDesktopLayout,
-    'You should supply either a mobile layout or a desktop layout. If you don\'t need two layouts then remove this widget and use the widget you want to use directly. ',
+    'You should supply either a mobile layout or a desktop layout. If you don\'t need two layouts then remove this widget and use the widget you want to use directly.',
     );
   }
 

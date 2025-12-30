@@ -1,8 +1,16 @@
 import '../core/refined_breakpoints.dart';
 import '../core/screen_breakpoints.dart';
 
+// Singleton configuration for responsive sizing breakpoints.
+///
+/// Manages default and custom [ScreenBreakpoints] and [RefinedBreakpoints].
+/// Access via [instance]; customize with [setCustomBreakpoints].
 class ResponsiveSizingConfig {
   static ResponsiveSizingConfig? _instance;
+
+  /// Singleton instance of [ResponsiveSizingConfig].
+  ///
+  /// Lazily initialized on first access.
   static ResponsiveSizingConfig get instance {
     _instance ??= ResponsiveSizingConfig();
 
@@ -39,7 +47,10 @@ class ResponsiveSizingConfig {
 
   RefinedBreakpoints? _customRefinedBreakPoints;
 
-  /// Set the breakPoints which will then be returned through the [breakpoints]
+  /// Sets custom breakpoints, overriding defaults.
+  ///
+  /// If [customBreakpoints] is null, reverts to defaults.
+  /// [customRefinedBreakpoints] is optional.
   void setCustomBreakpoints(
       ScreenBreakpoints? customBreakpoints, {
         RefinedBreakpoints? customRefinedBreakpoints,
@@ -50,9 +61,11 @@ class ResponsiveSizingConfig {
     }
   }
 
+  /// Current [ScreenBreakpoints], preferring custom over defaults.
   ScreenBreakpoints get breakpoints =>
       _customBreakPoints ?? _defaultBreakPoints;
 
+  /// Current [RefinedBreakpoints], preferring custom over defaults.
   RefinedBreakpoints get refinedBreakpoints =>
       _customRefinedBreakPoints ?? _defaultRefinedBreakPoints;
 }

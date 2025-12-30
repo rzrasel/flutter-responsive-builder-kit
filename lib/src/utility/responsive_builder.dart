@@ -5,21 +5,35 @@ import '../core/sizing_information.dart';
 import '../helpers/device_screen_helper.dart';
 import '../helpers/refined_size_helper.dart';
 
+/// A [LayoutBuilder] wrapper that provides [SizingInformation] for responsive UIs.
+///
+/// Use the [builder] callback to receive sizing data and render adaptive widgets.
+/// Example:
+/// ```dart
+/// ResponsiveBuilder(
+///   builder: (context, sizing) => sizing.isMobile ? MobileLayout() : DesktopLayout(),
+/// )
+/// ```
 class ResponsiveBuilder extends StatelessWidget {
-  final Widget Function(
-      BuildContext context,
-      SizingInformation sizingInformation,
-      ) builder;
+  /// Callback receiving context and [SizingInformation].
+  final Widget Function(BuildContext context, SizingInformation sizingInformation) builder;
 
+  /// Optional custom [ScreenBreakpoints] to override defaults.
   final ScreenBreakpoints? breakpoints;
+
+  /// Optional custom [RefinedBreakpoints] for granular sizing.
   final RefinedBreakpoints? refinedBreakpoints;
 
+  /// Creates a [ResponsiveBuilder] with required [builder] and optional breakpoints.
+  ///
+  /// The [builder] receives [SizingInformation] for adaptive rendering.
+  /// Use [breakpoints] to customize device thresholds and [refinedBreakpoints] for granular sizing.
   const ResponsiveBuilder({
-    Key? key,
+    super.key,
     required this.builder,
     this.breakpoints,
     this.refinedBreakpoints,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +46,7 @@ class ResponsiveBuilder extends StatelessWidget {
           refinedBreakpoint: refinedBreakpoints,
         ),
         screenSize: mediaQuery.size,
-        localWidgetSize:
-        Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
+        localWidgetSize: Size(boxConstraints.maxWidth, boxConstraints.maxHeight),
       );
       return builder(context, sizingInformation);
     });

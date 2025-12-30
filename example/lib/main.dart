@@ -11,51 +11,51 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if(ResponsiveLayoutHelper.isDesktop(context)) {
-      print("Desktop mode 1");
+      debugPrint("Desktop mode 1");
     } else if(ResponsiveLayoutHelper.isTablet(context)) {
-      print("Tablet mode 1");
+      debugPrint("Tablet mode 1");
     } else if(ResponsiveLayoutHelper.isMobile(context)) {
-      print("Mobile mode 1");
+      debugPrint("Mobile mode 1");
     } else if(ResponsiveLayoutHelper.isWatch(context)) {
-      print("Watch mode 1");
+      debugPrint("Watch mode 1");
     }
 
-    if(ResponsiveLayoutHelper.isDesktop(context, maxWidth: 900)) {
-      print("Desktop mode 2");
+    if(ResponsiveLayoutHelper.isDesktop(context, minWidth: 900)) {
+      debugPrint("Desktop mode 2");
     } else if(ResponsiveLayoutHelper.isTablet(context, minWidth: 650, maxWidth: 900)) {
-      print("Tablet mode 2");
+      debugPrint("Tablet mode 2");
     } else if(ResponsiveLayoutHelper.isMobile(context, minWidth: 250, maxWidth: 650)) {
-      print("Mobile mode 2");
+      debugPrint("Mobile mode 2");
     } else if(ResponsiveLayoutHelper.isWatch(context, maxWidth: 250)) {
-      print("Watch mode 2");
+      debugPrint("Watch mode 2");
     }
 
     if(Responsive.isExtraLargeScreen(context)) {
-      print("Extra large screen mode");
+      debugPrint("Extra large screen mode");
     } else if(Responsive.isDesktop(context)) {
-      print("Desktop screen mode");
+      debugPrint("Desktop screen mode");
     } else if(Responsive.isTablet(context)) {
-      print("Tablet screen mode");
+      debugPrint("Tablet screen mode");
     } else if(Responsive.isLargeMobile(context)) {
-      print("Large mobile screen mode");
+      debugPrint("Large mobile screen mode");
     } else if(Responsive.isMobile(context)) {
-      print("Mobile screen mode");
+      debugPrint("Mobile screen mode");
     } else if(Responsive.isWatch(context)) {
-      print("Watch screen mode");
+      debugPrint("Watch screen mode");
     }
 
     if(Responsive.isExtraLargeScreen(context, minWidth: 3840)) {
-      print("Extra large screen mode");
+      debugPrint("Extra large screen mode");
     } else if(Responsive.isDesktop(context, minWidth: 900)) {
-      print("Desktop screen mode");
+      debugPrint("Desktop screen mode");
     } else if(Responsive.isTablet(context, maxWidth: 900)) {
-      print("Tablet screen mode");
+      debugPrint("Tablet screen mode");
     } else if(Responsive.isLargeMobile(context, maxWidth: 650)) {
-      print("Large mobile screen mode");
+      debugPrint("Large mobile screen mode");
     } else if(Responsive.isMobile(context, maxWidth: 500)) {
-      print("Mobile screen mode");
+      debugPrint("Mobile screen mode");
     } else if(Responsive.isWatch(context, maxWidth: 250)) {
-      print("Watch screen mode");
+      debugPrint("Watch screen mode");
     }
 
 

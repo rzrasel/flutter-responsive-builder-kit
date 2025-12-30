@@ -1,3 +1,6 @@
+## 0.0.4
+* Add Responsive class documentation
+
 ## 0.0.3
 * Add Responsive class for easy to use
 
