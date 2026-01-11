@@ -1,6 +1,6 @@
 name: responsive_builder_kit
 description: "A Flutter responsive builder kit that helps create adaptive and breakpoint-based layouts for mobile, tablet, and desktop screens."
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/rzrasel/flutter-responsive-builder-kit
 repository: https://github.com/rzrasel/flutter-responsive-builder-kit
 documentation: https://github.com/rzrasel/flutter-responsive-builder-kit

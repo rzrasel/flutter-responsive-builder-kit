@@ -11,23 +11,23 @@ class Responsive {
   }
 
   /// Checks if screen is desktop-sized.
-  static bool isDesktop(BuildContext context, {double minWidth = 900}) {
-    return MediaQuery.sizeOf(context).width > minWidth;
+  static bool isDesktop(BuildContext context, {double minWidth = 900, double maxWidth = 3840}) {
+    return MediaQuery.sizeOf(context).width > minWidth && MediaQuery.sizeOf(context).width < maxWidth;
   }
 
   /// Checks if screen is tablet-sized (below desktop threshold).
-  static bool isTablet(BuildContext context, {double maxWidth = 900}) {
-    return MediaQuery.sizeOf(context).width < maxWidth;
+  static bool isTablet(BuildContext context, {double minWidth = 650, double maxWidth = 900}) {
+    return MediaQuery.sizeOf(context).width > minWidth && MediaQuery.sizeOf(context).width < maxWidth;
   }
 
   /// Checks if screen is large mobile (up to tablet min).
-  static bool isLargeMobile(BuildContext context, {double maxWidth = 650}) {
-    return MediaQuery.sizeOf(context).width <= maxWidth;
+  static bool isLargeMobile(BuildContext context, {double minWidth = 500, double maxWidth = 650}) {
+    return MediaQuery.sizeOf(context).width > minWidth && MediaQuery.sizeOf(context).width < maxWidth;
   }
 
   /// Checks if screen is standard mobile.
-  static bool isMobile(BuildContext context, {double maxWidth = 500}) {
-    return MediaQuery.sizeOf(context).width <= maxWidth;
+  static bool isMobile(BuildContext context, {double minWidth = 250, double maxWidth = 500}) {
+    return MediaQuery.sizeOf(context).width > minWidth && MediaQuery.sizeOf(context).width < maxWidth;
   }
 
   /// Checks if screen is watch-sized.

@@ -1,3 +1,6 @@
+## 0.0.5
+* Reset Responsive Mobile
+
 ## 0.0.4
 * Add Responsive class documentation
 
